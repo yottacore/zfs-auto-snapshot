@@ -43,10 +43,10 @@
 - [Roadmap](#roadmap)
 	- [Done](#done)
 		- [Better naming convention](#better-naming-convention)
-		- [Shebang changed from #!/bin/sh to #!/bin/bash.](#shebang-changed-from-binsh-to-binbash)
+		- [Shebang changed from #!/bin/sh to #!/bin/bash](#shebang-changed-from-binsh-to-binbash)
 	- [Future](#future)
-		- [Add the minor deltas of zfsonlinux version back in, over debian apt version](#add-the-minor-deltas-of-zfsonlinux-version-back-in-over-debian-apt-version)
-		- [Bash 4.4+ code cleanup and simplification for better readability, maintainability](#bash-44-code-cleanup-and-simplification-for-better-readability-maintainability)
+		- [Add the minor deltas of the zfsonlinux version back in, over debian apt version](#add-the-minor-deltas-of-the-zfsonlinux-version-back-in-over-debian-apt-version)
+		- [Bash 3.2+ code cleanup and simplification for better readability, maintainability](#bash-32-code-cleanup-and-simplification-for-better-readability-maintainability)
 		- [Allow flags to explicitly set UTC, local, or specified time offset](#allow-flags-to-explicitly-set-utc-local-or-specified-time-offset)
 		- [Include a family of user-level ZFS snapshot helper scripts](#include-a-family-of-user-level-zfs-snapshot-helper-scripts)
 		- [Address relevant high-priority issues and PRs from original project](#address-relevant-high-priority-issues-and-prs-from-original-project)
@@ -125,7 +125,7 @@ sudo apt purge zfs-auto-snapshot
 cd $(mktemp -d)
 git clone git@github.com:jim-collier/zfs-auto-snapshot.git
 cd zfs-auto-snapshot
-make install
+sudo make install
 ~~~
 
 ## Uninstallation
