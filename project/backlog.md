@@ -40,7 +40,7 @@ Mark boxes with ✔️, 🚫, or ◐. Empty means not started, or WIP.
 
 ### New features and enhancements
 
-- [✔️] Restore the two zfsonlinux deltas the refactor had dropped, for 1:1 ancestral parity: `--min-size`/`-m` (skip a snapshot when too little is written since the last) and the Darwin GNU-getopt shim. Darwin stays unsupported; the shim is kept only for parity. Both options are left undocumented in usage/man, matching upstream.
+- [✔️] Restore the two zfsonlinux deltas the refactor had dropped, for 1:1 ancestral parity: `--min-size`/`-m` (skip a snapshot when too little is written since the last) and the Darwin GNU-getopt shim. Darwin stays unsupported; the shim is kept only for parity. `--min-size` is documented in usage and the man page (upstream left it undocumented).
 
 ### Deferred
 
