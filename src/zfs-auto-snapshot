@@ -22,12 +22,14 @@
 ##	Purpose:
 ##		Automatically create, rotate, and destroy periodic ZFS snapshots.
 ##		Part of a ZFS snapshot auto-creation and pruning system (that also includes cron.d scripts).
+##	History: At bottom of script. Change log at <https://github.com/jim-collier/zfs-auto-snapshot>.
+##	Notes:
+##		- Minimum Bash version: 3.2 (no associative arrays, namerefs, 'declare -g', '[[ -v ]]', '${var,,}', or inherit_errexit).
+
 ##	Copyright 2011 Darik Horn <dajhorn@vanadac.com>
 ##	Copyright 2026 Jim Collier <-wneGcMGaw-1HuTBMeQagUP2zmBhL18HZh1KRYH5eis=>
-##		- Changes: See 'History' below, and change log at <https://github.com/jim-collier/zfs-auto-snapshot>
-##	License: See towards bottom for the SPDX-License-Identifier and preamble for GPL-2.0-only.
-##	History: At bottom of script.
-##	Bash floor: 3.2 (no associative arrays, namerefs, 'declare -g', '[[ -v ]]', '${var,,}', or inherit_errexit).
+##		- Changes: See 'History' below, and
+##	SPDX-License-Identifier: GPL-2.0-only
 
 
 ## Fail fast and loud. No inherit_errexit (Bash 4.4+); the command substitutions
@@ -105,21 +107,21 @@ print_log(){  # level, message...
 	## Logging must never abort the run, so 'logger' is guarded and we always
 	## return 0 (a false guard test would otherwise trip errexit at the caller).
 	case "$level" in
-		(eme*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.emerge $* || true; }
-		       echo "Emergency: $*" 1>&2 ;;
-		(ale*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.alert $* || true; }
-		       echo "Alert: $*" 1>&2 ;;
-		(cri*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.crit $* || true; }
-		       echo "Critical: $*" 1>&2 ;;
-		(err*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.err $* || true; }
-		       echo "Error: $*" 1>&2 ;;
-		(war*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.warning $* || true; }
-		       [[ -z "$opt_quiet" ]] && echo "Warning: $*" 1>&2 ;;
-		(not*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.notice $* || true; }
-		       [[ -z "$opt_quiet" ]] && echo $* ;;
-		(inf*) [[ -z "$opt_quiet" && -n "$opt_verbose" ]] && echo $* ;;
-		(deb*) [[ -n "$opt_debug" ]] && echo "Debug: $*" ;;
-		(*)    [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" $* || true; }
+		eme*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.emerge $* || true; }
+		      echo "Emergency: $*" 1>&2 ;;
+		ale*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.alert $* || true; }
+		      echo "Alert: $*" 1>&2 ;;
+		cri*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.crit $* || true; }
+		      echo "Critical: $*" 1>&2 ;;
+		err*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.err $* || true; }
+		      echo "Error: $*" 1>&2 ;;
+		war*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.warning $* || true; }
+		      [[ -z "$opt_quiet" ]] && echo "Warning: $*" 1>&2 ;;
+		not*) [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" -p daemon.notice $* || true; }
+		      [[ -z "$opt_quiet" ]] && echo $* ;;
+		inf*) [[ -z "$opt_quiet" && -n "$opt_verbose" ]] && echo $* ;;
+		deb*) [[ -n "$opt_debug" ]] && echo "Debug: $*" ;;
+		*)    [[ -n "$opt_syslog" ]] && { logger -t "$opt_prefix" $* || true; }
 		       echo $* 1>&2 ;;
 	esac
 	return 0
@@ -509,24 +511,11 @@ exit 0
 # }
 
 
-##	SPDX-License-Identifier: GPL-2.0-only
-##	Preamble:
-##		This program is free software; you can redistribute it and/or modify it under
-##		the terms of the GNU General Public License as published by the Free Software
-##		Foundation; either version 2 of the License, or (at your option) any later
-##		version.
-##
-##		This program is distributed in the hope that it will be useful, but WITHOUT
-##		ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-##		FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
-##		details.
-##
-##		You should have received a copy of the GNU General Public License along with
-##		this program; if not, write to the Free Software Foundation, Inc., 59 Temple
-##		Place, Suite 330, Boston, MA  02111-1307  USA
-
-
 ##	History:
+##		- 20260629 JC:
+##			- Some edge case bugs fixed.
+##			- Added the minor code lines in from the apt version.
+##			- Modernized from 39 year-old POSIX, to at least Bash 3.2+ (frozen version for macOS).
 ##		- 20260327 JC: Better snapshot names. Start with YYYYmmDD-HHMMSS_%z_zfs-auto-snap_*.
 ##		- 20260629 JC: Bash 3.2+ cleanup pass. FIXED a refactor regression: IFS had lost its tab, which
 ##			silently broke every multi-dataset and named-dataset run ('for X in $TARGETS' and the

@@ -40,12 +40,13 @@
 <!-- TOC -->
 
 - [Introduction](#introduction)
+	- [Versions TLDR](#versions-tldr)
 - [Roadmap](#roadmap)
 	- [Done](#done)
 		- [Better naming convention](#better-naming-convention)
 		- [Shebang changed from #!/bin/sh to #!/bin/bash](#shebang-changed-from-binsh-to-binbash)
+		- [Added the minor deltas of the zfsonlinux version back in over debian apt version](#added-the-minor-deltas-of-the-zfsonlinux-version-back-in-over-debian-apt-version)
 	- [Future](#future)
-		- [Add the minor deltas of the zfsonlinux version back in, over debian apt version](#add-the-minor-deltas-of-the-zfsonlinux-version-back-in-over-debian-apt-version)
 		- [Bash 3.2+ code cleanup and simplification for better readability, maintainability](#bash-32-code-cleanup-and-simplification-for-better-readability-maintainability)
 		- [Allow flags to explicitly set UTC, local, or specified time offset](#allow-flags-to-explicitly-set-utc-local-or-specified-time-offset)
 		- [Include a family of user-level ZFS snapshot helper scripts](#include-a-family-of-user-level-zfs-snapshot-helper-scripts)
@@ -68,7 +69,18 @@ This, in spite of the original script having some obvious minor bugs that even l
 
 It's also time for an update to bring some freshness to the project. (See roadmap below.)
 
-___Note__: While some attempt may be made to address original open [issues](https://github.com/zfsonlinux/zfs-auto-snapshot/issues) and [PRs](https://github.com/zfsonlinux/zfs-auto-snapshot/pulls), the focus will remain on ZFS-On-Linux. And only the Kernel module. In other words, not on BSD, Darwin, or the legacy FUSE version. (Although this will likely continue to work fine with those, and does now.)_
+Confused about which version is which? Here's the...
+
+### Versions TLDR
+
+- [zfsonlinux](https://github.com/zfsonlinux/zfs-auto-snapshot): No official version #. The OG version. Officially dead as of 2019. Still works.
+
+- [Debian apt version](https://launchpad.net/ubuntu/+source/zfs-auto-snapshot/1.2.4-1): v1.2.4-1. Appears to be unmaintained (but available) since 2017. Still works.
+
+- This version: The unique features of both previous versions, and modernized with the additional battle-tested features below.
+
+
+___Note__: While some attempt may be made to address original open [issues](https://github.com/zfsonlinux/zfs-auto-snapshot/issues) and [PRs](https://github.com/zfsonlinux/zfs-auto-snapshot/pulls), the focus will remain on ZFS-On-Linux, and secondarily BSD. And only the Kernel module; in other words, the focus is not Darwin nor the legacy FUSE version. (Although this will likely continue to work fine with those, and does now.)_
 
 ## Roadmap
 
@@ -81,7 +93,7 @@ ___Note__: While some attempt may be made to address original open [issues](http
 	- `filesys@20260408-195930_zfs-auto-snap_frequent` in local time.
 
 - Benefits:
-	- More natural sorting by date/time of snapshots, when listed sorted by name.
+	- More natural sorting by date/time of snapshots, when sorted by name.
 	- UTC time, with the same updated format, can still be specified in the script with existing constant.
 	- Manual snapshots with same convention will also be sorted correctly, e.g. when named something like:
 		- `filesys@20260408-195945_my-manual-important-snapshot`
@@ -91,15 +103,17 @@ ___Note__: While some attempt may be made to address original open [issues](http
 - This is to immediately fix a bug in the original script, where the `sh` shebang is incompatible with variables declared with `local`.
 - Ongoing, will allow for cleanup of unnecessarily convoluted POSIX syntax, and potentially more powerful features in the future.
 
+#### Added the minor deltas of the zfsonlinux version back in (over debian apt version)
+
+The (now dead) version this was forked from, while it enhances features and compatibility on Linux as noted above, goes slightly backwards by just a few lines of code, when diff-compared to zfsonlinux's github version. The latter detects zero-size snapshots, and adds Darwin compatibility. (Though the latter is explicitly not a goal of this fork, in part since ZFS development for Darwin lags significantly behind Linux.) But those lines will be added back in so that the main script is is a 1:1 ancestral fork.
+
 ### Future
-
-#### Add the minor deltas of the zfsonlinux version back in, over debian apt version
-
-The current version, while it enhances features and compatibility on Linux as noted above, goes slightly backwards by just a few lines of code, when diff-compared to the zfsonlinux github version. The latter detects zero-size snapshots, and adds Darwin compatibility. (Though the latter is explicitly not a goal of this fork, in part since ZFS development for Darwin lags significantly behind Linux.) But those lines will be added back in so that the main script is is a 1:1 ancestral fork.
 
 #### Bash 3.2+ code cleanup and simplification for better readability, maintainability
 
 Bash 3.2+ allows for idiomatic language improvements, more compact syntactic sugar, and safety - compared to legacy POSIX-only.
+
+Bash 3.2 is the last target avaialable on macOS Darwin, unless you install the latest Bash (v5) - via ports or brew.
 
 #### Allow flags to explicitly set UTC, local, or specified time offset
 
