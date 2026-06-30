@@ -40,6 +40,11 @@ Keep NUM recent snapshots and destroy older snapshots.
 \fB\-l\fR, \fB\-\-label\fR=\fILAB\fR
 LAB is usually 'hourly', 'daily', or 'monthly'.
 .TP
+\fB\-m\fR, \fB\-\-min\-size\fR=\fIKB\fR
+Skip creating a snapshot for a dataset unless at least KB kilobytes
+have been written to it since its previous snapshot.  0 (the default)
+disables the check.
+.TP
 \fB\-p\fR, \fB\-\-prefix\fR=\fIPRE\fR
 PRE is 'zfs\-auto\-snap' by default.
 .TP
