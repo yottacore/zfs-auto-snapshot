@@ -68,7 +68,7 @@ This, in spite of the original script having some obvious minor bugs that even l
 
 It's also time for an update to bring some freshness to the project. (See roadmap below.)
 
-___Note__: While some attempt may be made to address original open [issues](https://github.com/zfsonlinux/zfs-auto-snapshot/issues) and [PRs](https://github.com/zfsonlinux/zfs-auto-snapshot/pulls), the focus will remain on ZFS-On-Linux. And only the Kernel module. In other words, not on BSD, Darwin, or the legacy FUSE version. (Although this will likely continue to work fine with those as long as `bash` is installed on BSD, and/or upgraded from v3 to 4.4+ e.g. on Darwin.)_
+___Note__: While some attempt may be made to address original open [issues](https://github.com/zfsonlinux/zfs-auto-snapshot/issues) and [PRs](https://github.com/zfsonlinux/zfs-auto-snapshot/pulls), the focus will remain on ZFS-On-Linux. And only the Kernel module. In other words, not on BSD, Darwin, or the legacy FUSE version. (Although this will likely continue to work fine with those, and does now.)_
 
 ## Roadmap
 
