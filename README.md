@@ -78,27 +78,28 @@ ___Note__: While some attempt may be made to address original open [issues](http
 
 - Instead of e.g.:
 	- `filesys@zfs-auto-snap_frequent_2026-04-08-0259`, in UTC time, you get:
-	- `filesys@20260408-195930_-0700_zfs-auto-snap_frequent` in local time with UTC offset included.
+	- `filesys@20260408-195930_zfs-auto-snap_frequent` in local time.
+
 - Benefits:
 	- More natural sorting by date/time of snapshots, when listed sorted by name.
-	- UTC time, with same format, can specified in script with existing constant.
+	- UTC time, with the same updated format, can still be specified in the script with existing constant.
 	- Manual snapshots with same convention will also be sorted correctly, e.g. when named something like:
-		- `filesys@20260408-195945_-0700_my-manual-important-snapshot`
+		- `filesys@20260408-195945_my-manual-important-snapshot`
 
-#### Shebang changed from `#!/bin/sh` to `#!/bin/bash`.
+#### Shebang changed from `#!/bin/sh` to `#!/bin/bash`
 
-- This is to immediately fix a glaring bug in the original script, where the `sh` shebang is incompatible with variables declared with `local`.
-- Ongoing, will allow for far less convoluted syntax cleanup, and potentially more powerful features in the future.
+- This is to immediately fix a bug in the original script, where the `sh` shebang is incompatible with variables declared with `local`.
+- Ongoing, will allow for cleanup of unnecessarily convoluted POSIX syntax, and potentially more powerful features in the future.
 
 ### Future
 
-#### Add the minor deltas of zfsonlinux version back in, over debian apt version
+#### Add the minor deltas of the zfsonlinux version back in, over debian apt version
 
 The current version, while it enhances features and compatibility on Linux as noted above, goes slightly backwards by just a few lines of code, when diff-compared to the zfsonlinux github version. The latter detects zero-size snapshots, and adds Darwin compatibility. (Though the latter is explicitly not a goal of this fork, in part since ZFS development for Darwin lags significantly behind Linux.) But those lines will be added back in so that the main script is is a 1:1 ancestral fork.
 
-#### Bash 4.4+ code cleanup and simplification for better readability, maintainability
+#### Bash 3.2+ code cleanup and simplification for better readability, maintainability
 
-Bash 4.4+ allows for significant idiomatic language improvements, compact syntactic sugar, and safety - compared to legacy POSIX-only.
+Bash 3.2+ allows for idiomatic language improvements, more compact syntactic sugar, and safety - compared to legacy POSIX-only.
 
 #### Allow flags to explicitly set UTC, local, or specified time offset
 
@@ -142,4 +143,4 @@ sudo apt install --reinstall zfs-auto-snapshot
 > Copyright © 2011 Darik Horn <dajhorn@vanadac.com><br>
 > Copyright © 2026 Jim Collier \[-wneGcMGaw-1HuTBMeQagUP2zmBhL18HZh1KRYH5eis=\]<br>
 > → Changes documented above, and in changlog.md<br>
-> Licensed under GNU GPL v2 <https://www.gnu.org/licenses/gpl-2.0.html>. No warranty.
+> Licensed under the [GNU GPL v2](https://www.gnu.org/licenses/gpl-2.0.html). No warranty.
