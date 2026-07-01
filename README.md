@@ -46,8 +46,9 @@
 		- [Better naming convention](#better-naming-convention)
 		- [Shebang changed from #!/bin/sh to #!/bin/bash](#shebang-changed-from-binsh-to-binbash)
 		- [Added the minor deltas of the zfsonlinux version back in over debian apt version](#added-the-minor-deltas-of-the-zfsonlinux-version-back-in-over-debian-apt-version)
-	- [Future](#future)
 		- [Bash 3.2+ code cleanup and simplification for better readability, maintainability](#bash-32-code-cleanup-and-simplification-for-better-readability-maintainability)
+	- [Future](#future)
+		- [Bash 5+ code cleanup and simplification for better readability, maintainability](#bash-5-code-cleanup-and-simplification-for-better-readability-maintainability)
 		- [Allow flags to explicitly set UTC, local, or specified time offset](#allow-flags-to-explicitly-set-utc-local-or-specified-time-offset)
 		- [Include a family of user-level ZFS snapshot helper scripts](#include-a-family-of-user-level-zfs-snapshot-helper-scripts)
 		- [Address relevant high-priority issues and PRs from original project](#address-relevant-high-priority-issues-and-prs-from-original-project)
@@ -107,13 +108,19 @@ ___Note__: While some attempt may be made to address original open [issues](http
 
 The (now dead) version this was forked from, while it enhances features and compatibility on Linux as noted above, goes slightly backwards by just a few lines of code, when diff-compared to zfsonlinux's github version. The latter detects zero-size snapshots, and adds Darwin compatibility. (Though the latter is explicitly not a goal of this fork, in part since ZFS development for Darwin lags significantly behind Linux.) But those lines will be added back in so that the main script is is a 1:1 ancestral fork.
 
-### Future
-
 #### Bash 3.2+ code cleanup and simplification for better readability, maintainability
 
 Bash 3.2+ allows for idiomatic language improvements, more compact syntactic sugar, and safety - compared to legacy POSIX-only.
 
 Bash 3.2 is the last target avaialable on macOS Darwin, unless you install the latest Bash (v5) - via ports or brew.
+
+### Future
+
+#### Bash 5+ code cleanup and simplification for better readability, maintainability
+
+Exploratory.
+
+It's not a stretch to set Base 5 as a dependency. It's been widely available since 2020. BSD users get v5 for free when installing `bash` from their native repo, and macOS can be upgraded to Bash 5 with two command lines. (One to install `brew`, one to install `bash`.) In spite of this project not "officially" supporting macOS.
 
 #### Allow flags to explicitly set UTC, local, or specified time offset
 
