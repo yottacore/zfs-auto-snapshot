@@ -25,6 +25,7 @@
 ##	History: At bottom of script. Change log at <https://github.com/jim-collier/zfs-auto-snapshot>.
 ##	Notes:
 ##		- Minimum Bash version: 3.2 (no associative arrays, namerefs, 'declare -g', '[[ -v ]]', '${var,,}', or inherit_errexit).
+##	Version: v2.0.0 build 1n48pxn.
 
 ##	Copyright 2011 Darik Horn <dajhorn@vanadac.com>
 ##	Copyright 2026 Jim Collier <-wneGcMGaw-1HuTBMeQagUP2zmBhL18HZh1KRYH5eis=>
@@ -201,9 +202,6 @@ do_snapshots(){  # props, flags, snapname, oldglob, targets
 	return 0
 }
 
-
-# main ()
-# {
 
 ## Darwin ships BSD getopt; prefer Homebrew's GNU getopt if present. Darwin is not
 ## a supported target, but this is kept for ancestral parity with zfsonlinux.
@@ -508,7 +506,6 @@ print_log notice "@$SNAPNAME," \
   "$WARNING_COUNT warnings."
 
 exit 0
-# }
 
 
 ##	History:
@@ -536,3 +533,7 @@ exit 0
 ##			  is not the same as 'source' - the shebang is honored.
 ##			- Added linting exceptions.
 ##			- Integrated these changes into a forked project on github.
+##		- 20260630 JC:
+##			- Added two lines of code from the apt version of zfs-auto-snapshot that had been dropped in the refactor, for 1:1 ancestral parity.
+##			- Refactored from POSIX to Bash v3.2+ - for more compactness, readability, debuggability, maintainability, and failure robustness.
+##			- Added --min-size/-m option to skip a snapshot when too little is written since the last.
