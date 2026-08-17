@@ -7,7 +7,7 @@
 <!-- TOC ignore:true -->
 # Project backlog
 
-This is a product backlog just for pre-v1.0.0 release. After that, bugs, features, and enhancements will be mananged in Github Issues, and/or [todo.md](../todo.md)
+Product backlog. Roadmap items from the [readme](../README.md) land here once they're real work rather than an idea. Day-to-day bugs and smaller enhancements can also go to Github Issues and/or [todo.md](../todo.md).
 
 <!-- TOC ignore:true -->
 ## Table of contents
@@ -32,6 +32,7 @@ In each section, items are listed approximately from newest to oldest.
 | 🔘   | Not started
 | 🛠️   | Started, and/or partially complete
 | ✅   | Complete
+| ✋   | Deferred
 | 🚫   | Canceled
 
 ## First steps
@@ -46,6 +47,14 @@ In each section, items are listed approximately from newest to oldest.
 
 ### New features and enhancements
 
+- 🔘 Bash 5+ cleanup pass. Exploratory - Bash 5 has been standard since 2020, BSD gets it from the native repo, and macOS is two commands away via brew, so it's not a stretch as a dependency. Would drop the 3.2 workarounds (no associative arrays, namerefs, `declare -g`, `[[ -v ]]`, `${var,,}`, `inherit_errexit`).
+- 🔘 Flags to explicitly set the time basis for snapshot names: `--utc`, `--local-time`, `--time-offset=nnn`.
+	- Whatever these produce must stay a legal ZFS snapshot name - a `+` offset is not, which is why the `%z` stamp was dropped in the first place.
+	- Changing the stamp width strands every existing snapshot: pruning is a glob match on `$dataset@$glob`, so a name that no longer matches is never pruned. Either keep the stamp 15 chars, or ship a rename sweep with the change.
+- 🔘 A family of user-level ZFS snapshot helper scripts.
+	- Take a manual snapshot given a filesystem and a description - script prepends the date/time in the right format, escapes and truncates the description as needed.
+	- Destroy snapshots by nestable `--include='regex'` / `--exclude='regex'` expressions, plus `--older-than=n` (date/time, or a 'days'/'hours' suffix).
+- 🔘 Work through the relevant high-priority issues and PRs still open on the original project.
 - ✅ Bash 3.2+ cleanup pass: `[[ ]]`/`(( ))`, typed/lowercase locals, `set -euo pipefail` with the needed guards, and tidier marmot-style formatting. No behaviour change beyond the two regressions above; verified by a dry-run fingerprint across 12 modes plus a synthetic prune/destroy test.
 - ✅ Restore the two zfsonlinux deltas the refactor had dropped, for 1:1 ancestral parity: `--min-size`/`-m` (skip a snapshot when too little is written since the last) and the Darwin GNU-getopt shim. Darwin stays unsupported; the shim is kept only for parity. `--min-size` is documented in usage and the man page (upstream left it undocumented).
 
