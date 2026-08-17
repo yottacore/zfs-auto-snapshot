@@ -35,23 +35,23 @@
 # zfs-auto-snapshot
 
 <!-- TOC ignore:true -->
-## Table of ontents
+## Table of contents
 
 <!-- TOC -->
 
 - [Introduction](#introduction)
 	- [Versions TLDR](#versions-tldr)
 - [Roadmap](#roadmap)
-	- [Done](#done)
-		- [Better naming convention](#better-naming-convention)
-		- [Shebang changed from #!/bin/sh to #!/bin/bash](#shebang-changed-from-binsh-to-binbash)
-		- [Added the minor deltas of the zfsonlinux version back in over debian apt version](#added-the-minor-deltas-of-the-zfsonlinux-version-back-in-over-debian-apt-version)
-		- [Bash 3.2+ code cleanup and simplification for better readability, maintainability](#bash-32-code-cleanup-and-simplification-for-better-readability-maintainability)
 	- [Future](#future)
 		- [Bash 5+ code cleanup and simplification for better readability, maintainability](#bash-5-code-cleanup-and-simplification-for-better-readability-maintainability)
 		- [Allow flags to explicitly set UTC, local, or specified time offset](#allow-flags-to-explicitly-set-utc-local-or-specified-time-offset)
 		- [Include a family of user-level ZFS snapshot helper scripts](#include-a-family-of-user-level-zfs-snapshot-helper-scripts)
 		- [Address relevant high-priority issues and PRs from original project](#address-relevant-high-priority-issues-and-prs-from-original-project)
+	- [Items finished for v2.0.0](#items-finished-for-v200)
+		- [Better naming convention](#better-naming-convention)
+		- [Shebang changed from #!/bin/sh to #!/bin/bash](#shebang-changed-from-binsh-to-binbash)
+		- [Added the minor deltas of the zfsonlinux version back in over debian apt version](#added-the-minor-deltas-of-the-zfsonlinux-version-back-in-over-debian-apt-version)
+		- [Bash 3.2+ code cleanup and simplification for better readability, maintainability](#bash-32-code-cleanup-and-simplification-for-better-readability-maintainability)
 - [Installation](#installation)
 - [Uninstallation](#uninstallation)
 - [Copyright and license](#copyright-and-license)
@@ -85,7 +85,28 @@ ___Note__: While some attempt may be made to address original open [issues](http
 
 ## Roadmap
 
-### Done
+### Future
+
+#### Bash 5+ code cleanup and simplification for better readability, maintainability
+
+Exploratory.
+
+It's not a stretch to set Base 5 as a dependency. It's been widely available since 2020. BSD users get v5 for free when installing `bash` from their native repo, and macOS can be upgraded to Bash 5 with two command lines. (One to install `brew`, one to install `bash`.) In spite of this project not "officially" supporting macOS.
+
+#### Allow flags to explicitly set UTC, local, or specified time offset
+
+E.g. `--utc`, `--local-time`, or `--time-offset=nnn`
+
+#### Include a family of user-level ZFS snapshot helper scripts
+
+Examples:
+
+- Create a manual snapshot with a filesystem and description. Script will prepend date/time in correct format, and properly escape and shorten description if necessary.
+- Destroy snapshots based on a series of nestable --include='regex' and/or --exclude='regex' expressions as arguments, as well as --older-than=n arg (in date/time format or 'days' 'hours' etc. suffix).
+
+#### Address relevant high-priority issues and PRs from original project
+
+### Items finished for v2.0.0
 
 #### Better naming convention
 
@@ -112,30 +133,13 @@ The (now dead) version this was forked from, while it enhances features and comp
 
 Bash 3.2+ allows for idiomatic language improvements, more compact syntactic sugar, and safety - compared to legacy POSIX-only.
 
-Bash 3.2 is the last target avaialable on macOS Darwin, unless you install the latest Bash (v5) - via ports or brew.
-
-### Future
-
-#### Bash 5+ code cleanup and simplification for better readability, maintainability
-
-Exploratory.
-
-It's not a stretch to set Base 5 as a dependency. It's been widely available since 2020. BSD users get v5 for free when installing `bash` from their native repo, and macOS can be upgraded to Bash 5 with two command lines. (One to install `brew`, one to install `bash`.) In spite of this project not "officially" supporting macOS.
-
-#### Allow flags to explicitly set UTC, local, or specified time offset
-
-E.g. `--utc`, `--local-time`, or `--time-offset=nnn`
-
-#### Include a family of user-level ZFS snapshot helper scripts
-
-Examples:
-
-- Create a manual snapshot with a filesystem and description. Script will prepend date/time in correct format, and properly escape and shorten description if necessary.
-- Destroy snapshots based on a series of nestable --include='regex' and/or --exclude='regex' expressions as arguments, as well as --older-than=n arg (in date/time format or 'days' 'hours' etc. suffix).
-
-#### Address relevant high-priority issues and PRs from original project
+Bash 3.2 is the last target available on macOS Darwin, unless you install the latest Bash (v5) - via ports or brew.
 
 ## Installation
+
+This is the preferred way to install, because it includes the `man` and `cron` files.
+
+If you just download the single file from the latest stable release, you don't get that. The version on `main` is always the latest stable (not dev) version.
 
 ~~~bash
 ## Remove package-installed version if installed - or via rpm, pacman, etc.
