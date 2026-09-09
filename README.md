@@ -166,6 +166,6 @@ sudo apt install --reinstall zfs-auto-snapshot
 ## Copyright and license
 
 > Copyright © 2011 Darik Horn <dajhorn@vanadac.com><br>
-> Copyright © 2026 Jim Collier \[-wneGcMGaw-1HuTBMeQagUP2zmBhL18HZh1KRYH5eis=\]<br>
+> Copyright © 2026 Jim Collier [ID: 2უNაɘ«҂թȹɤξπ๙¿ձϖ]<br>
 > → Changes documented above, and in changlog.md<br>
 > Licensed under the [GNU GPL v2](https://www.gnu.org/licenses/gpl-2.0.html). No warranty.
