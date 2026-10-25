@@ -30,6 +30,22 @@ Going forward, new issues in the new template at the bottom of this file, will g
 
 ## Issues
 
+- CICD reset: a small cicd.bash
+	- ID: 2026102416234689
+	- Type: Task
+	- Status: Queued
+	- Priority: High
+	- Opened: 2026-10-24 16:23
+	- Requirements:
+		- There's no pipeline or test suite. Add a small `cicd.bash` per the shared CICD rules.
+		- `bash -n` and shellcheck, with lint output kept and a lint `--check` gate.
+		- Regression tests from dry runs, which need no root, for each Done item. The IFS tab, `-v`, the 15-char stamp, and `--min-size` are the first ones.
+		- Run them under a pinned Bash 3.2 and a pinned Bash 5 in a container, falling back to the host. Run them on the FreeBSD VM too, through the shared host lock and the VM state helper, and SKIP when it's not there.
+		- Each test gets a base 32 minute ID and one PASS, FAIL, or SKIP line. Steps use the numbered lines.
+		- The shared flags, `--merge-gate` from a pre-push hook on `main` that skips docs-only pushes, low priority, the run temp folder layout, and container cleanup by label.
+		- Details in the private notes.
+		- Sweeping override, 2026-10-24: this supersedes any earlier decision on this project that conflicts with it.
+
 ## Old format
 
 ### Bugs
